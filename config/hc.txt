@@ -1,0 +1,48 @@
+hc(1)                            Comandos de usuario                           hc(1)
+
+NOMBRE
+       hc - Descripción de lo que hace el comando
+
+SINOPSIS
+       hc [OPCIONES] ARGUMENTOS
+
+DESCRIPCIÓN
+       hc es un comando que realiza una tarea específica. Aquí debes proporcionar una descripción detallada
+       de lo que hace el comando y cómo se utiliza.
+
+OPCIONES
+       -a, --opcion-a   Descripción de la opción a
+       -b, --opcion-b   Descripción de la opción b
+       -c, --opcion-c   Descripción de la opción c
+
+ARGUMENTOS
+       arg1            Descripción del argumento 1
+       arg2            Descripción del argumento 2
+
+EJEMPLOS
+       Ejemplo de uso del comando:
+
+       hc -a valor1 -b valor2 arg1 arg2
+
+       Esto ejecutará el comando hc con las opciones -a y -b, y los argumentos arg1 y arg2.
+
+INFORMACIÓN ADICIONAL
+       Para obtener más información, consulte la documentación completa en línea o visite el sitio web
+       del proyecto en https://www.ejemplo.com/hc.
+
+AUTOR
+       Nombre del autor
+
+VEA TAMBIÉN
+       Otros comandos relacionados que podrían ser útiles junto con hc.
+
+HISTORIA
+       Una breve historia de las versiones y cambios importantes del comando.
+
+FECHA DE CREACIÓN
+       Fecha de creación del manual.
+
+COPYRIGHT
+       Copyright (c) Año del copyright. Este software es de código abierto y está sujeto a los términos de la licencia
+       GPL (GNU General Public License).
+

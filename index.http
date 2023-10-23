@@ -1,0 +1,1 @@
+GET http://localhost:8080/api/subir?tipo=d&nombre=dos HTTP/1.1
