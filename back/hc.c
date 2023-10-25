@@ -19,7 +19,7 @@ void leerAyuda(){
     printf("Argumento:Descripcion\n");
     printf("--help: Muestra la ayuda.\n");
     printf("-c: Cambiar directorio base.\n");
-    printf("-af: Agregar archivo.\n");
+    printf("-gd: Obtener directorio main.\n");
     printf("-ad: Agregar directorio.\n");
     printf("-ef: Eliminar archivo.\n");
     printf("-ed: Eliminar directorio.\n");
@@ -67,6 +67,9 @@ void cambiarDirectorioMain(char *s){
     if(!system(concatPunt("echo ",n_path))) printf("Se cambio el directorio main a: %s\n",s);
     else printf("Error inesperado");
 }
+void getMainDirectory(){
+    printf(leerFile("./config/path.txt"));
+}
 void agregarDirectorio(char *s){
     char *path =concatPunt(leerFile("./config/path.txt"),"/");
     char *comando = concatPunt("mkdir ",concatPunt("\"",path));
@@ -108,7 +111,7 @@ int main(int argc, char const *argv[])
     //condicionales de argumento
     if(!strcmp(argv[1],"-c"))cambiarDirectorioMain(argv[2]);
     if(!strcmp(argv[1],"-ad"))agregarDirectorio(argv[2]);
-    if(!strcmp(argv[1],"-af"))agregarFile(argv[2]);
+    if(!strcmp(argv[1],"-gd"))getMainDirectory(argv[2]);
     if(!strcmp(argv[1],"-ed"))eliminarDirectorio(argv[2]);
     if(!strcmp(argv[1],"-ef"))eliminarFile(argv[2]);
     return 0;

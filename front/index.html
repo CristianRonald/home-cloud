@@ -12,30 +12,13 @@
     <link rel="stylesheet" type="text/css" href="./styles/estilos.css">
 </head>
 <body>
-    <div class="box" id="box-add">
-        <div class="add-box">
-            <input type="text" class="box-input" id="val-directory" value="" name=""
-                placeholder="/home/deid/documentos/cloud/"
-            > 
-        </div>
-        <div class="add-box">
-            <input type="text" class="box-input" value="/home/deid/Documents/cloud/" 
-            name="" id="val-path">
-            <input type="submit" value="Agregar">
-        </div>
-        <div class="add-box">
-            <input type="checkbox" name="add-file" id="af">
-            <label for="add-file">Archivo</label>
-            <input type="checkbox" name="add-directory" id="ad">
-            <label for="add-file">Directorio</label>
-        </div>
-        <div class="add-box">
-            <input type="button" style="margin:4px 100px;" value="Enviar">
-        </div>
-    </div>
-    <!--div class="box" id="box-files">
-    </div-->
-<script>
-</script>
+  <form ref='uploadForm' 
+        id='dataFile' 
+        action='/upload' 
+        method='post' 
+        encType="multipart/form-data">
+        <input type="file" name="archivo" />
+        <input type='submit' value='Subir archivo' />
+    </form>  
 </body>
 </html>

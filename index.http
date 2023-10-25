@@ -1,1 +1,6 @@
-GET http://localhost:8080/api/subir?tipo=d&nombre=dos HTTP/1.1
+POST http://localhost:8080/upload HTTP/1.1
+
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 13
+
+say=Hi&to=Mom
