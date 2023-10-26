@@ -5,8 +5,6 @@ class Tree {
   }
   async agregarNodos(path) {
     try{
-      console.log(path +">");
-      console.log(__dirname);
       let arr = path.split('\n');
       const data = [];
     for (let a of arr) {
