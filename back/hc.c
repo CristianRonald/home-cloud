@@ -12,9 +12,9 @@
 #include <string.h>
 
 #ifdef __linux__
-#define so "Linux"
+#define profile "~/"
 #elif _WIN32
-#define so "Windows"
+#define profile "%USERPROFILE%/"
 #endif
 //Path main del directorio que revisara datos
 void leerAyuda(){
@@ -70,7 +70,7 @@ void cambiarDirectorioMain(char *s){
     else printf("Error inesperado");
 }
 void getMainDirectory(){
-    printf(leerFile("./config/path.txt"));
+    puts(leerFile("./config/path.txt"));
 }
 void agregarDirectorio(char *s){
     char *path =concatPunt(leerFile("./config/path.txt"),"/");

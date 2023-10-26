@@ -18,7 +18,7 @@ h3{
     width: 15em;
     height: 20em;
     border: 1px solid #ff7373 ;
-    background-color: #566965;
+    background-color: #566966;
     border-radius: 10px;
 }
 #menu{
@@ -27,11 +27,12 @@ h3{
 input{
     border: 1px solid #ff7373 ;
     width: 90%;
-    color: #ff7373;
+    color: #566966;
     background-color: #f2a176;
     margin-left: 5%;
     margin-bottom: 10px;
     border-radius: 6px;
+    text-align: center;
 }
 .botones{
     width: 100%;
@@ -44,6 +45,10 @@ input{
     width: 80%;
     height: 20px;
 }
+input:focus{
+    border:2.5px solid #ff7373 ;
+    outline: none;
+}
 #tree{
     float:left;
     width: 60%;
@@ -52,15 +57,44 @@ input{
     height:90%;
 }
 .square{
-    width:10%;
-    height: 2em;
+    width:5em;
+    height: 5em;
     font-size: 12px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
+    float: left;
 }
 .square>img{
-    margin-right: 2px;
-    width:40%;
-    height: 90%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:30px;
+    height: 30px;
+}
+.square>p{
+    height: 2em;
+    font-size: smaller;
+    overflow: hidden;
+    text-align: center;
+}
+.oculto {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10em;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 999;
+}
+
+#alerta {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #000;
+  background-color: #566966;
+  border-radius: 5px;
+  width:15em;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }

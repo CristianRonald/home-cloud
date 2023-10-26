@@ -1,6 +1,2 @@
-POST http://localhost:8080/upload HTTP/1.1
+GET http://localhost:8080/api/data/title HTTP/1.1
 
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 13
-
-say=Hi&to=Mom

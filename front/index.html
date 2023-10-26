@@ -12,36 +12,29 @@
     <link rel="stylesheet" type="text/css" href="./styles/estilos.css">
 </head>
 <body>
-  <!--form ref='uploadForm' 
-        id='dataFile' 
-        action='/upload' 
-        method='post' 
-        encType="multipart/form-data">
-        <input type="file" name="archivo" />
-        <input type='submit' value='Subir archivo' />
-    </form-->  
+ 
+    <div id="alerta" class="oculto">
+        <input id="fileUpload" type="file" name="archivo" />
+        <input id=upFile type='submit' value='Subir' />
+      <button id="cerrarAlerta">Cerrar</button>
+    </div>
     <div class="cuadro" id="menu">
       <center>
        <h3>HOME-CLOUD</h3>
       </center>
-       <input id=path type="text">
+       <input id=path type="text" value="/">
        <div class="botones">
-        <input type="button" value="Nueva carpeta">
-        <input type="button" value="Subir archivo">
+        <input type="button" id=newCarpeta value="Nueva carpeta">
+        <input type="button" id=newFile value="Subir archivo">
        </div>
        <input id=nameWifi type="text">
        <input id=nameOs type="text">
     </div>
     <div class="cuadro" id="tree">
       <center>
-        <h4>~/Desktop/hc-1
+        <h4 id=title style="margin:10px 0; font-size:11px;">~/Desktop/hc-1
       </center>
-      <div id=caja_tree>
-        <div class="square">
-          <img name=tipo src="./images/folder.png"> 
-          <label>Prueba 1</label>
-        </div>
-      </div>
+      <div id=caja_tree> </div>
     </div>
     <script src="./index.js"></script>
 </body>
