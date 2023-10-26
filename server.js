@@ -1,17 +1,32 @@
 const express = require("express");
 const {exec} = require("child_process");
 const fileUpload = require("express-fileupload");
-const { homedir } = require("os");
+
+const {Tree} = require('./back/modulo/Tree');
+
 const app = express();
+//Middwa
 app.use(express.static('front'));
 app.use(fileUpload());
 app.get("/",(req,res)=>res.sendFile(__dirname+"/front/index.html"));
 app.get("/api/subir",(req,res)=>{
     const tipo = req.query.tipo;
     const nombre = req.query.nombre;
-    console.log(tipo,nombre);
     actualizarDatos(tipo,nombre).then(respuesta=>{
         res.send(respuesta);
+    });
+});
+app.get('/api/tree',(req,res)=>{
+    res.setHeader('Content-Type','application/json');
+    const t = new Tree();
+    getFiles('/')
+    .then(resp=>{
+    t.agregarNodos(resp);
+    console.log(t.getData());
+    res.send(JSON.stringify(t.getData()));
+    })
+    .catch(err=>{
+    res.send({message: err});
     });
 });
 app.post('/upload',async (req,res)=>{
@@ -42,6 +57,16 @@ function actualizarDatos(tipo,nombre){
         });
     });
 }
+function getFiles(path){
+    let comando = "hc -l "+path.split('/')[1];
+    if(path == '/') comando = 'hc -li';
+    return new Promise((resolve,reject)=>{
+      exec(comando,(err,stdout,stderr)=>{
+        if(err) reject(stderr);
+        resolve(stdout);
+      });
+    });
+  }
 
 const PUERTO = process.env.PORT || 8080;
 app.listen(PUERTO,()=>{

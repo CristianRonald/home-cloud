@@ -3,20 +3,64 @@
     padding: 0;
 }
 html, body{
+    background-color:#948a71;
     width: 100%;
     height: 100%;
+    color:#f2a176;
 }
-.menu{
-    margin: 0 auto;
-    margin-top: 10px;
-    width: 25em;
-    height: 5em;
-    border: 1px solid black;
+h3{
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
-.tree{
-    margin: 0 auto;
-    margin-top: 10px;
-    width: 50em;
+.cuadro{
+    margin: 20px 40px ;
+    padding: 2px;
+    width: 15em;
     height: 20em;
-    border: 1px solid black;
+    border: 1px solid #ff7373 ;
+    background-color: #566965;
+    border-radius: 10px;
+}
+#menu{
+    float: left;
+}
+input{
+    border: 1px solid #ff7373 ;
+    width: 90%;
+    color: #ff7373;
+    background-color: #f2a176;
+    margin-left: 5%;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+.botones{
+    width: 100%;
+    margin: 18px 0;
+}
+.botones>input{
+    background-color:#cc9476;
+    margin-left: 10%;
+    margin-bottom: 10px;
+    width: 80%;
+    height: 20px;
+}
+#tree{
+    float:left;
+    width: 60%;
+}
+#caja_tree{
+    height:90%;
+}
+.square{
+    width:10%;
+    height: 2em;
+    font-size: 12px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.square>img{
+    margin-right: 2px;
+    width:40%;
+    height: 90%;
 }

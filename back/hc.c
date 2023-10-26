@@ -4,7 +4,9 @@
     y que te retorna una tabla de archivos.
     En cualquier sistema operativo. 
     Desarrollado en octubre del 2023
+    --Cristian Ronald---
 */
+#include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -100,6 +102,48 @@ void eliminarFile(char *s){
     free(path);
     free(comando);
 }
+#ifdef __linux__
+void listar(){}
+#elif _WIN32
+void listarI(){
+    int cont = 0;
+   WIN32_FIND_DATA findFileData;
+    HANDLE hFind = FindFirstFile(concatPunt(leerFile("./config/path.txt"),"/*"), &findFileData);
+    if(hFind == INVALID_HANDLE_VALUE) {
+        DWORD dwError = GetLastError(); // Obtiene el código de error
+        printf("Error al abrir el directorio. Código de error: %d\n", dwError);
+        return 1;
+    }
+    do {
+      cont++;
+      if(cont<3) continue;
+      if(findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) printf("%s,directorio\n", findFileData.cFileName);
+      else printf("%s,archivo\n", findFileData.cFileName);
+    } while (FindNextFile(hFind, &findFileData) != 0);
+
+    FindClose(hFind); 
+}
+void listar(const char* carpeta){
+  int cont = 0;
+  char *path =concatPunt(concatPunt(leerFile("./config/path.txt"),"/"),concatPunt(carpeta,"/*"));
+   WIN32_FIND_DATA findFileData;
+    HANDLE hFind = FindFirstFile(path, &findFileData);
+    if(hFind == INVALID_HANDLE_VALUE) {
+        DWORD dwError = GetLastError(); // Obtiene el código de error
+        printf("Error al abrir el directorio. Código de error: %d\n", dwError);
+        return 1;
+    }
+    do {
+      cont++;
+      if(cont<3) continue;
+      if(findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) printf("%s,directorio\n", findFileData.cFileName);
+      else printf("%s,archivo\n", findFileData.cFileName);
+    } while (FindNextFile(hFind, &findFileData) != 0);
+
+    FindClose(hFind); 
+    free(path);
+}
+#endif
 int main(int argc, char const *argv[])
 {
     //condicionales de inicio
@@ -114,5 +158,7 @@ int main(int argc, char const *argv[])
     if(!strcmp(argv[1],"-gd"))getMainDirectory(argv[2]);
     if(!strcmp(argv[1],"-ed"))eliminarDirectorio(argv[2]);
     if(!strcmp(argv[1],"-ef"))eliminarFile(argv[2]);
+    if(!strcmp(argv[1],"-l"))listar(argv[2]);
+    if(!strcmp(argv[1],"-li"))listarI();
     return 0;
 }
