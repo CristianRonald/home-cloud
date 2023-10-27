@@ -1,7 +1,17 @@
-const {exec} = require("child_process");
+const icon = require("../../config/icons.json");
 class Tree {
   constructor(){
     this.data;
+  }
+  getIcons(ent){
+    let extension;
+    for(let elem in icon){
+      icon[elem].forEach(elemento => {
+        console.log(elemento==ent);
+        if(elemento==ent) extension =  `${elem}.png`; 
+      });
+    }
+    return extension;
   }
   async agregarNodos(path) {
     try{
@@ -13,7 +23,7 @@ class Tree {
       dat.nombre = a.split(',')[0].split('\r')[0]; 
       dat.tipo = a.split(',')[1].split('\r')[0]; 
       dat.extension = '';
-      if(dat.nombre.split('.').length>1) dat.extension = dat.nombre.split('.')[1];
+      if(dat.nombre.split('.').length>1) dat.extension = this.getIcons(dat.nombre.split('.')[1]); 
       data.push(dat);
     }
     this.data = data;

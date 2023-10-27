@@ -20,7 +20,7 @@
       let ar = document.createElement('div');
       ar.className = 'square';
       const img = document.createElement('img');
-      img.src = './images/file.png'
+      img.src = './images/'+elem.extension;
       const p = document.createElement('p');
       p.innerText = elem.nombre;
       ar.appendChild(img);

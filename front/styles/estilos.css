@@ -55,6 +55,7 @@ input:focus{
 }
 #caja_tree{
     height:90%;
+    overflow: scroll;
 }
 .square{
     width:5em;
@@ -70,7 +71,7 @@ input:focus{
     height: 30px;
 }
 .square>p{
-    height: 2em;
+    height: 2.5em;
     font-size: smaller;
     overflow: hidden;
     text-align: center;
@@ -80,8 +81,8 @@ input:focus{
   position: fixed;
   top: 0;
   left: 0;
-  width: 10em;
   height: 100%;
+  width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
@@ -91,6 +92,11 @@ input:focus{
 
 #alerta {
   background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10em;
   padding: 20px;
   border: 1px solid #000;
   background-color: #566966;
