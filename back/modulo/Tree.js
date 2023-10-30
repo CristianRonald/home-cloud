@@ -7,7 +7,6 @@ class Tree {
     let extension;
     for(let elem in icon){
       icon[elem].forEach(elemento => {
-        console.log(elemento==ent);
         if(elemento==ent) extension =  `${elem}.png`; 
       });
     }

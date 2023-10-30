@@ -1,10 +1,15 @@
 
   class Tree{
-    async getTitle(){
+    constructor(){
+      this.cont = 0;
     }
     crearDirectorios(directorios){
       directorios.forEach(elem => {
       let dir = document.createElement('div');
+      dir.ondblclick= ()=>{
+        this.obtenerData("/"+dir.innerText);
+        //path.value='/';
+      };
       dir.className = 'square';
       const img = document.createElement('img');
       img.src = './images/folder.png'
@@ -29,10 +34,11 @@
       });
     }
     async obtenerData(path){
+      this.cont++;
       try {
        const respuesta = await((await fetch('/api/tree'+path)).json());
        const resp = await((await fetch('/api/data/title')).json());
-      console.log(resp);
+       if(this.cont === 1) dirMain.value = resp.message;
       title.innerText = resp.message;
       caja_tree.innerHTML = '';
        this.crearDirectorios(
@@ -49,13 +55,17 @@
   const t = new Tree();
   path.value='/';
   t.obtenerData("/");
-  path.addEventListener("keydown",(e)=>{
+  async ()=>{
+    const resp = await((await fetch('/api/data/title')).json());
+    dirMain.value = resp.message;
+  }
+  /*path.addEventListener("keydown",(e)=>{
     if(e.keyCode === 13){
      t.obtenerData(path.value);
      path.value='/';
      e.preventDefault();
     }
-  });
+  });*/
   upFile.onclick=async ()=>{
     const formData = new FormData();
     const archivo = fileUpload.files[0];

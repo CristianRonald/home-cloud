@@ -27,13 +27,16 @@
         <input type="button" id=newCarpeta value="Nueva carpeta">
         <input type="button" id=newFile value="Subir archivo">
        </div>
-       <input id=nameWifi type="text">
-       <input id=nameOs type="text">
+       <input id=dirMain type="text" disabled>
+       <input id=nameOs  type="text">
     </div>
     <div class="cuadro" id="tree">
+      <div class="header-tree">
       <center>
-        <h4 id=title style="margin:10px 0; font-size:11px;">~/Desktop/hc-1
+        <h4 id=title></h4>
       </center>
+      <img src="./images/arrow.png" id=arrow class="row" alt="">
+      </div>
       <div id=caja_tree> </div>
     </div>
     <script src="./index.js"></script>
