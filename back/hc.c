@@ -6,14 +6,16 @@
     Desarrollado en octubre del 2023
     --Cristian Ronald---
 */
-#include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+#define dirFile "./config/path.txt"
 #ifdef __linux__
 #define profile "~/"
+#include <sys/stat.h>
 #elif _WIN32
+#include <windows.h>
 #define profile "%USERPROFILE%/"
 #endif
 //Path main del directorio que revisara datos
@@ -65,29 +67,43 @@ char* leerFile(char* p){
 
 void cambiarDirectorioMain(char *s){
     char* comando = concatPunt(s,"> ");
-    char* n_path = concatPunt(comando, " ./config/path.txt" );
+    char* n_path = concatPunt(comando, dirFile );
+    #ifdef _WIN32
+    if(CreateDirectory(s,NULL)!=0) printf("Se creo el directorio->");
     if(!system(concatPunt("echo ",n_path))) printf("Se cambio el directorio main a: %s\n",s);
-    else printf("Error inesperado");
+    else printf("Hubo un error al crear el directorio");
+    #else 
+    if(mkdir(s,0777)==0) printf("Directorio creado con exito");
+    else printf("Hubo un error al crear el directorio");
+    #endif
 }
 void getMainDirectory(){
-    puts(leerFile("./config/path.txt"));
+    puts(leerFile(dirFile));
 }
 void agregarDirectorio(char *s){
-    char *path =concatPunt(leerFile("./config/path.txt"),"/");
-    char *comando = concatPunt("mkdir ",concatPunt("\"",path));
-    if(!system(concatPunt(comando,concatPunt(s,"\"")))) printf("Comando exitoso");
-    else printf("Ya existe el directorio\n");
+    char *path =concatPunt(leerFile(dirFile),"/");
+    char *comando = concatPunt(path,s);
+    //if(!system(concatPunt(comando,concatPunt(s,"\"")))) printf("Comando exitoso");
+    //else printf("Ya existe el directorio\n");
+    #ifdef _WIN32
+    if(CreateDirectory(comando,NULL)!=0) printf("Directorio creado con exito");
+    else printf("Hubo un error al crear el directorio");
+    #else 
+    if(mkdir(comando,0777)==0) printf("Directorio creado con exito");
+    else printf("Hubo un error al crear el directorio");
+    #endif
+
     free(path);
-    free(comando);
+    //free(comando);
 }
 void agregarFile(char *s){
     char* comando = concatPunt(s,">> ");
-    char* n_path = concatPunt(comando, leerFile("./config/path.txt"));
+    char* n_path = concatPunt(comando, leerFile(dirFile));
     if(!system(concatPunt("echo ",n_path))) printf("Se creo el archivo %s\n",s);
     else printf("Error inesperado");
 }
 void eliminarDirectorio(char *s){
-    char *path =concatPunt(leerFile("./config/path.txt"),"/");
+    char *path =concatPunt(leerFile(dirFile),"/");
     char *comando = concatPunt("rd /s /q ",concatPunt("\"",path));
     if(!system(concatPunt(comando,concatPunt(s,"\"")))) printf("Se elimino el directorio %s\n",s);
     else printf("No encontrado\n");
@@ -95,7 +111,7 @@ void eliminarDirectorio(char *s){
     free(comando);
 }
 void eliminarFile(char *s){
-    char *path =concatPunt(leerFile("./config/path.txt"),"/");
+    char *path =concatPunt(leerFile(dirFile),"/");
     char *comando = concatPunt("del ",concatPunt("\"",path));
     if(!system(concatPunt(comando,concatPunt(s,"\"")))) printf("Se elimino el directorio %s\n",s);
     else printf("No encontrado\n");
@@ -108,7 +124,7 @@ void listar(){}
 void listarI(){
     int cont = 0;
    WIN32_FIND_DATA findFileData;
-    HANDLE hFind = FindFirstFile(concatPunt(leerFile("./config/path.txt"),"/*"), &findFileData);
+    HANDLE hFind = FindFirstFile(concatPunt(leerFile(dirFile),"/*"), &findFileData);
     if(hFind == INVALID_HANDLE_VALUE) {
         DWORD dwError = GetLastError(); // Obtiene el código de error
         printf("Error al abrir el directorio. Código de error: %d\n", dwError);
@@ -125,7 +141,7 @@ void listarI(){
 }
 void listar(const char* carpeta){
   int cont = 0;
-  char *path =concatPunt(concatPunt(leerFile("./config/path.txt"),"/"),concatPunt(carpeta,"/*"));
+  char *path =concatPunt(concatPunt(leerFile(dirFile),"/"),concatPunt(carpeta,"/*"));
    WIN32_FIND_DATA findFileData;
     HANDLE hFind = FindFirstFile(path, &findFileData);
     if(hFind == INVALID_HANDLE_VALUE) {

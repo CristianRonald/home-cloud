@@ -41,7 +41,7 @@ class Menu {
   }
   async crearCasita() {
     const resp = await ((await fetch('/api/data/title')).json());
-    dirMain.value = resp.message;
+    dirFile.value = resp.message;
   }
 }
 class Tree {
@@ -90,9 +90,9 @@ class Tree {
         return;
       }
       const resp = await ((await fetch('/api/data/title')).json());
-      if (this.cont === 1) dirMain.value = resp.message;
+      if (this.cont === 1) dirFile.value = resp.message;
       arrow.style.display = '';
-      if (resp.message === dirMain.value) arrow.style.display = 'none';
+      if (resp.message === dirFile.value) arrow.style.display = 'none';
       title.innerText = resp.message;
       caja_tree.innerHTML = '';
       this.crearDirectorios(
