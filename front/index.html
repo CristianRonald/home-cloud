@@ -13,10 +13,15 @@
 </head>
 <body>
  
-    <div id="alerta" class="oculto">
+    <div id="upArchivo" class="oculto">
         <input id="fileUpload" type="file" name="archivo" />
         <input id=upFile type='submit' value='Subir' />
       <button id="cerrarAlerta">Cerrar</button>
+    </div>
+    <div id="crearDir" class="oculto">
+        <input id="dirUp" type="text" name="directorio" />
+        <input id=upDir type='submit' value='Subir' />
+      <button id="cerrar">Cerrar</button>
     </div>
     <div class="cuadro" id="menu">
       <center>
@@ -24,7 +29,7 @@
       </center>
        <input id=path type="text" value="/">
        <div class="botones">
-        <input type="button" id=newCarpeta value="Nueva carpeta">
+        <input type="button" id="newCarpeta" value="Nueva carpeta">
         <input type="button" id=newFile value="Subir archivo">
        </div>
        <input id=dirMain type="text" disabled>

@@ -9,6 +9,9 @@ const app = express();
 app.use(express.static('front'));
 app.use(fileUpload());
 app.get("/",(req,res)=>res.sendFile(__dirname+"/front/index.html"));
+app.post("/api/crear/directorio",(req,res)=>{
+ res.send({msg:req.files});
+});
 app.get("/api/data/title",async (req,res)=>{
     res.setHeader('Content-Type','application/json');
     try {
@@ -26,7 +29,7 @@ app.get('/api/tree',async (req,res)=>{
         t.agregarNodos(resp);
         res.send(JSON.stringify(t.getData()));
     } catch (error) {
-        res.send({message: err});
+        res.send({"error":"Vacio o no existe"});
     }
 });
 app.get('/api/tree/:nombre',async (req,res)=>{

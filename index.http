@@ -1,2 +1,2 @@
-GET http://localhost:8080/api/data/title HTTP/1.1
+GET http://localhost:8080/api/tree HTTP/1.1
 

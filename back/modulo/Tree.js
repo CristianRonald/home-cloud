@@ -28,7 +28,7 @@ class Tree {
     this.data = data;
     }
     catch(err){
-      console.log(err);
+     this.data = [];
     }
   }
   getData(){return this.data;}

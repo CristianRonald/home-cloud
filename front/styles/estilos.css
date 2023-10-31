@@ -2,6 +2,10 @@
     margin: 0;
     padding: 0;
 }
+body{
+    display:flex;
+    align-items: center;
+}
 html, body{
     background-color:#948a71;
     width: 100%;
@@ -13,10 +17,8 @@ h3{
     margin-bottom: 10px;
 }
 .cuadro{
-    margin: 20px 40px ;
+    margin: 10px 10px ;
     padding: 2px;
-    width: 15em;
-    height: 20em;
     border: 1px solid #ff7373 ;
     background-color: #566966;
     border-radius: 10px;
@@ -27,6 +29,7 @@ h3{
 }
 #menu{
     float: left;
+    width:15em;
 }
 input{
     border: 1px solid #ff7373 ;
@@ -55,12 +58,12 @@ input:focus{
 }
 #tree{
     float:left;
-    width: 60%;
+    width: 70%;
+    height: 90%;
 }
 #caja_tree{
     height:90%;
     margin-top: 10px;
-    overflow: scroll;
 }
 .square{
     width:5em;
@@ -110,7 +113,20 @@ input:focus{
     margin-left: 2px;
     margin-top: 2px;
 }
-#alerta {
+#upArchivo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10em;
+  padding: 20px;
+  border: 1px solid #000;
+  background-color: #566966;
+  border-radius: 5px;
+  width:15em;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+#crearDir {
   position: absolute;
   top: 50%;
   left: 50%;
