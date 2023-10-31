@@ -17,6 +17,17 @@ Para lograr nuestro objetivo, hemos empleado una combinación de tecnologías en
 
 ## Requisitos Previos
 
+### GIT
+- En [windows](https://git-scm.com/download/win) solo es necesario el instalador.
+- En Linux dependiendo de el sistema de administración de paquetes.
+  - Arch Linux 
+  ``` bash
+  $ sudo pacman -S git
+  ``` 
+  - Debian
+  ```bash
+  $ sudo apt-get install git
+  ``` 
 ### NodeJS
 Para la instalacion hay que seguir los siguientes links, en Windows solo en necesario descargar el instalador.
 - En [Windows](https://nodejs.org/en/download)
@@ -24,12 +35,25 @@ Para la instalacion hay que seguir los siguientes links, en Windows solo en nece
 - En [Mac OS](https://gist.github.com/tomysmile/da3cb8194ec8f0e4df86)
 
 ## Instalación
-### 
-[En desarrollo]
+### Descargar el proyecto
+En cualquier carpeta donde se desee guardar el proyecto
+```
+$ git clone https://github.com/CristianRonald/home-cloud.git
+```
+### Descargar dependencias
+En el directorio principal de home-cloud
+```
+$ npm install
+```
 ### Ejecutar el archivo c
-En el arhivo principal de home-cloud
+En el directorio principal de home-cloud
 ``` bash
 $ cd back && gcc -o ../hc hc.c && cd ..
+```
+### Añadir el directorio Main.
+En el directorio principal de home-cloud
+```
+$ hc -c <PATH>
 ```
 ## Funcionamiento FronEnd
 
