@@ -2,23 +2,17 @@ export default class Menu {
   constructor() {
     this.crearCasita();
     findFile.value = '';
+    nameHost.value = window.location.host;
     newFile.onclick = () => upArchivo.classList.remove("oculto");
     cerrarAlerta.onclick = () => upArchivo.classList.add("oculto");
     newCarpeta.onclick = () => crearDir.classList.remove("oculto");
     cerrar.onclick = () => crearDir.classList.add("oculto");
   }
   async nuevaCarpeta() {
-    const formData = new FormData();
-    const dirName = dirUp.value;
     try {
-      formData.append('directorio', dirName);
-      const res = await fetch('/api/crear/carpeta', {
-        method: 'POST',
-        body: formData,
-      });
+      const res = await fetch('/api/subir/'+dirUp.value);
       const data = await res.json();
-      console.log(data.msg);
-      t.obtenerData("/");
+      alert(data.msg);
     }
     catch (e) {
       console.log(e);
@@ -35,7 +29,6 @@ export default class Menu {
       });
       const data = await res.json();
       alert(data.msg);
-      t.obtenerData("/");
     } catch (error) {
       console.log(error);
     }

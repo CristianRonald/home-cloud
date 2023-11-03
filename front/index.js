@@ -3,6 +3,12 @@ import Tree from './modules/Tree.js';
 const m = new Menu();
 const t = new Tree();
 arrow.onclick = () => t.retornarPath();
-crearDir.onclick = () => m.nuevaCarpeta();
-upFile.onclick = () => m.subirArchivo();
+upDir.onclick = () =>{
+m.nuevaCarpeta();
+t.obtenerData("/");
+} 
+upFile.onclick = () => {
+m.subirArchivo();
+t.obtenerData("/");
+}
 findFile.addEventListener('input', () => m.buscarElemento(findFile.value)); 

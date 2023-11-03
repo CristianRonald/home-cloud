@@ -12,6 +12,15 @@ app.get("/",(req,res)=>res.sendFile(__dirname+"/front/index.html"));
 app.post("/api/crear/directorio",(req,res)=>{
  res.send({msg:req.files});
 });
+app.get("/api/subir/:nombre",async (req,res)=>{
+    const nombre = req.params.nombre;
+    try {
+       await subirCarpeta(nombre);
+       res.send({"msg":"Hecho"}); 
+    } catch (err) {
+       res.send({"error":err}); 
+    }
+});
 app.get("/api/data/title",async (req,res)=>{
     res.setHeader('Content-Type','application/json');
     try {
@@ -76,9 +85,9 @@ function solicitarPath(){
         });
     });
 }
-function actualizarDatos(tipo,nombre){
+function subirCarpeta(nombre){
     return new Promise(resolve=>{
-        let comando = `hc -a${tipo} ${nombre}`;
+        let comando = `hc -ad ${nombre}`;
         console.log(comando);
         exec(comando,(err,stdout,stderr)=>{
             resolve(stdout);
