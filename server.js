@@ -33,14 +33,16 @@ app.get('/api/tree',async (req,res)=>{
     }
 });
 app.get('/api/tree/:nombre',async (req,res)=>{
-    const nombre = req.params.nombre;
+    const nombre = req.params.nombre.replace(/\+/g,'/');
+    console .log(nombre);
     const t = new Tree();
     try {
         const resp = await getFiles(nombre);
-        await cambiarPath(await solicitarPath(),nombre);
+        //await cambiarPath(await solicitarPath(),nombre);
         t.agregarNodos(resp);
         res.send(JSON.stringify(t.getData()));
     } catch (err) {
+        console.log(err);
         res.send({message: err});
     }
 });
@@ -84,8 +86,8 @@ function actualizarDatos(tipo,nombre){
     });
 }
 function getFiles(path){
-    let comando = "hc -l "+path;
-    if(path == '/') comando = 'hc -li';
+    let comando = "hc -li"
+    if(path != '/') comando = 'hc -l '+path;
     return new Promise((resolve,reject)=>{
       exec(comando,(err,stdout,stderr)=>{
         if(err) reject(stderr);
@@ -96,5 +98,5 @@ function getFiles(path){
 
 const PUERTO = process.env.PORT || 8080;
 app.listen(PUERTO,()=>{
-    console.log(`Servidor activo en la ruta http//:localhost:${PUERTO}`);
+    console.log(`Servidor activo en la ruta http://localhost:${PUERTO}`);
 });

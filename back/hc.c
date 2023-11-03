@@ -141,7 +141,7 @@ void listarI(){
 }
 void listar(const char* carpeta){
   int cont = 0;
-  char *path =concatPunt(concatPunt(leerFile(dirFile),"/"),concatPunt(carpeta,"/*"));
+  char *path =concatPunt(carpeta,"/*");
    WIN32_FIND_DATA findFileData;
     HANDLE hFind = FindFirstFile(path, &findFileData);
     if(hFind == INVALID_HANDLE_VALUE) {

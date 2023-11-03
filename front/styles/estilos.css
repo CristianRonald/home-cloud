@@ -19,7 +19,7 @@ h3{
 .cuadro{
     margin: 10px 10px ;
     padding: 2px;
-    border: 1px solid #ff7373 ;
+    border: 1px outset #ff7373 ;
     background-color: #566966;
     border-radius: 10px;
 }
@@ -59,11 +59,14 @@ input:focus{
 #tree{
     float:left;
     width: 70%;
-    height: 90%;
+    height: 80%;
 }
 #caja_tree{
-    height:90%;
+    height:70%;
     margin-top: 10px;
+    background-color: #495753;
+    padding: 1em;
+    overflow-y: scroll;
 }
 .square{
     width:5em;

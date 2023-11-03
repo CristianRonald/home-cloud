@@ -12,9 +12,9 @@ class Tree {
     }
     return extension;
   }
-  async agregarNodos(path) {
+  async agregarNodos(elem) {
     try{
-      let arr = path.split('\n');
+      let arr = elem.split('\n');
       const data = [];
     for (let a of arr) {
       if(a == '') continue;
