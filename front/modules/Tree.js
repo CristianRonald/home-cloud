@@ -63,8 +63,6 @@ export default class Tree {
         "path": path,
         "title": title.innerText
       });
-      arrow.style.display='';
-      if(title.innerText === dirFile.value) arrow.style.display = 'none';
       dirFile.value = resp.message;
       caja_tree.innerHTML = '';
       this.crearDirectorios(
@@ -76,5 +74,14 @@ export default class Tree {
     } catch (err) {
       console.log(err);
     }
+  }
+  actualizarTree(respuesta){
+      caja_tree.innerHTML = '';
+      this.crearDirectorios(
+        respuesta.filter(elem => elem.tipo === 'directorio')
+      );
+      this.crearArchivos(
+        respuesta.filter(elem => elem.tipo === 'archivo')
+      );
   }
 }

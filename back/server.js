@@ -2,23 +2,28 @@ const express = require("express");
 const {exec} = require("child_process");
 const fileUpload = require("express-fileupload");
 const path = require('path');
+const bodyParser = require('body-parser');
 
 const {Tree} = require('./modulo/Tree');
 
 const app = express();
 const filePath = path.join(__dirname,"..","front","index.html");
-//Middwa
+//Middwaler
 app.use(express.static(path.join(__dirname,"..","front")));
 app.use(fileUpload());
+app.use(bodyParser.json());
+
 app.get("/",(req,res)=>res.sendFile(filePath));
-app.post("/api/crear/directorio",(req,res)=>{
- res.send({msg:req.files});
-});
-app.get("/api/subir/:nombre",async (req,res)=>{
+
+app.post("/api/subir/:nombre",async (req,res)=>{
     const nombre = req.params.nombre;
+    const b = req.body;
+    const t = new Tree();
     try {
-       await subirCarpeta(nombre);
-       res.send({"msg":"Hecho"}); 
+       await subirCarpeta(b.titulo,nombre);
+       const resp = await getFiles(b.titulo);
+       t.agregarNodos(resp);
+       res.send(JSON.stringify(t.getData())); 
     } catch (err) {
        res.send({"error":err}); 
     }
@@ -45,7 +50,6 @@ app.get('/api/tree',async (req,res)=>{
 });
 app.get('/api/tree/:nombre',async (req,res)=>{
     const nombre = req.params.nombre.replace(/\+/g,'/');
-    console .log(nombre);
     const t = new Tree();
     try {
         const resp = await getFiles(nombre);
@@ -60,13 +64,18 @@ app.get('/api/tree/:nombre',async (req,res)=>{
 app.post('/upload',async (req,res)=>{
     if(!req.files || Object.keys(req.files).length ===0) return res.status(400).send({ message: "No files upload"});
     const archivo = req.files.archivo;
-    let path = '';
-    await solicitarPath().then(resp=>path = resp+'/'+archivo.name);
-    console.log(path);
+    const  path = req.body.titulo+'/'+archivo.name;
+    const t = new Tree();
+    try {
+        const resp = await getFiles(req.body.titulo);
+        t.agregarNodos(resp);
     archivo.mv(path,(err)=>{
         if(err) res.status(500).send(err);
-        res.send({msg:"Archivo subido"});
+        res.send(JSON.stringify(t.getData()));
     });
+    } catch (error) {
+        res.status(404).send(error);
+    }
 });
 function cambiarPath(main,nombre){
     return new Promise((resolve,reject)=>{
@@ -87,9 +96,9 @@ function solicitarPath(){
         });
     });
 }
-function subirCarpeta(nombre){
+function subirCarpeta(relPath,nombre){
     return new Promise(resolve=>{
-        let comando = `hc -ad ${nombre}`;
+        let comando = `hc -ad ${relPath} ${nombre}`;
         console.log(comando);
         exec(comando,(err,stdout,stderr)=>{
             resolve(stdout);

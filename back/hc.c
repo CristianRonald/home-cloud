@@ -80,8 +80,8 @@ void cambiarDirectorioMain(char *s){
 void getMainDirectory(){
     puts(leerFile(dirFile));
 }
-void agregarDirectorio(char *s){
-    char *path =concatPunt(leerFile(dirFile),"/");
+void agregarDirectorio(char *p,char *s){
+    char *path =concatPunt(p,"/");
     char *comando = concatPunt(path,s);
     //if(!system(concatPunt(comando,concatPunt(s,"\"")))) printf("Comando exitoso");
     //else printf("Ya existe el directorio\n");
@@ -170,7 +170,7 @@ int main(int argc, char const *argv[])
     if(!strcmp(argv[1],"--help"))leerAyuda();
     //condicionales de argumento
     if(!strcmp(argv[1],"-c"))cambiarDirectorioMain(argv[2]);
-    if(!strcmp(argv[1],"-ad"))agregarDirectorio(argv[2]);
+    if(!strcmp(argv[1],"-ad"))agregarDirectorio(argv[2],argv[3]);
     if(!strcmp(argv[1],"-gd"))getMainDirectory(argv[2]);
     if(!strcmp(argv[1],"-ed"))eliminarDirectorio(argv[2]);
     if(!strcmp(argv[1],"-ef"))eliminarFile(argv[2]);

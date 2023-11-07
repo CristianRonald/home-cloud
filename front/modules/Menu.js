@@ -10,9 +10,13 @@ export default class Menu {
   }
   async nuevaCarpeta() {
     try {
-      const res = await fetch('/api/subir/'+dirUp.value);
-      const data = await res.json();
-      alert(data.msg);
+      const fd = new FormData();
+      fd.append("titulo",title.innerText);
+      const res = await fetch('/api/subir/'+dirUp.value,{
+        method: "POST",
+        body: fd
+      }).then(resp=>resp.json());
+      return res;
     }
     catch (e) {
       console.log(e);
@@ -23,12 +27,12 @@ export default class Menu {
     const archivo = fileUpload.files[0];
     try {
       formData.append('archivo', archivo);
+      formData.append('titulo', title.innerText);
       const res = await fetch('/upload', {
         method: 'POST',
         body: formData,
-      });
-      const data = await res.json();
-      alert(data.msg);
+      }).then(resp=>resp.json());
+      return res;
     } catch (error) {
       console.log(error);
     }

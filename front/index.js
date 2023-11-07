@@ -2,13 +2,10 @@ import Menu from './modules/Menu.js';
 import Tree from './modules/Tree.js';
 const m = new Menu();
 const t = new Tree();
-arrow.onclick = () => t.retornarPath();
-upDir.onclick = () =>{
-m.nuevaCarpeta();
-t.obtenerData("/");
+upDir.onclick = async() =>{
+t.actualizarTree(await m.nuevaCarpeta());
 } 
-upFile.onclick = () => {
-m.subirArchivo();
-t.obtenerData("/");
+upFile.onclick = async() => {
+t.actualizarTree(await m.subirArchivo());
 }
 findFile.addEventListener('input', () => m.buscarElemento(findFile.value)); 
