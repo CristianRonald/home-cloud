@@ -23,26 +23,19 @@
         <input id=upDir type='submit' value='Subir' />
       <button id="cerrar">Cerrar</button>
     </div>
-    <div class="cuadro" id="menu">
-      <center>
-       <h3>HOME-CLOUD</h3>
-      </center>
-       <input id=findFile type="text">
-       <div class="botones">
-        <input type="button" id="newCarpeta" value="Nueva carpeta">
-        <input type="button" id=newFile value="Subir archivo">
-       </div>
-       <input id=dirFile type="text" disabled>
-       <input id=nameHost  type="text">
-    </div>
     <div class="cuadro" id="tree">
       <div class="header-tree">
-      <center>
-        <h4 id=title></h4>
-      </center>
+      <h4 id=title></h4>
       <img src="./images/arrow.png" id=arrow class="row" alt="">
+       <div class="botones">
+        <button id="newCarpeta"><img src="./images/dir.png"></button>
+        <button id="newFile"><img src="./images/fil.png"></button>
+       </div>
+       <input id=findFile type="text">
       </div>
       <div id=caja_tree> </div>
+       <input id=dirFile type="text" disabled>
+       <input id=nameHost  type="text">
     </div>
     <script type="module" src="./index.js"></script>
 </body>

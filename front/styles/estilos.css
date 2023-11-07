@@ -15,9 +15,11 @@ html, body{
 h3{
     margin-top: 20px;
     margin-bottom: 10px;
-}
+}   
+
 .cuadro{
-    margin: 10px 10px ;
+    width:98%;
+    margin: 2% ;
     padding: 2px;
     border: 1px outset #ff7373 ;
     background-color: #566966;
@@ -25,15 +27,12 @@ h3{
 }
 .header-tree{
     width: 100%;
-    height: 10%;
-}
-#menu{
-    float: left;
-    width:15em;
+    height: 2em;
+    padding: 5px;
 }
 input{
     border: 1px solid #ff7373 ;
-    width: 90%;
+    width: auto;
     color: #566966;
     background-color: #f2a176;
     margin-left: 5%;
@@ -42,24 +41,26 @@ input{
     text-align: center;
 }
 .botones{
-    width: 100%;
-    margin: 18px 0;
+    width: 30%;
+    float:right;
+    margin-right: 10px;
 }
-.botones>input{
-    background-color:#cc9476;
-    margin-left: 10%;
-    margin-bottom: 10px;
+.botones>button>img{
     width: 80%;
-    height: 20px;
+}
+.botones>button{
+    background-color:#cc9476;
+    width: 3em;
+    border: 1px solid #ff7373 ;
+    height: 2.5em;
+    float:right
 }
 input:focus{
     border:2.5px solid #ff7373 ;
     outline: none;
 }
 #tree{
-    float:left;
-    width: 70%;
-    height: 80%;
+    height: 90%;
 }
 #caja_tree{
     height:70%;
@@ -105,9 +106,10 @@ input:focus{
   z-index: 999;
 }
 #title{
-    width:90%;
+    width:22%;
     margin: 0;
     padding: 0;
+    float:left;
     font-size: 11px;
 }
 .row{
@@ -141,4 +143,9 @@ input:focus{
   border-radius: 5px;
   width:15em;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+#findFile{
+    width: 22%;
+    margin:2px;
+    float:right;
 }

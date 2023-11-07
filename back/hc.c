@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define dirFile "./config/path.txt"
+#define dirFile "../config/path.txt"
 #ifdef __linux__
 #define profile "~/"
 #include <sys/stat.h>

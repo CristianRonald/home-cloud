@@ -1,14 +1,16 @@
 const express = require("express");
 const {exec} = require("child_process");
 const fileUpload = require("express-fileupload");
+const path = require('path');
 
-const {Tree} = require('./back/modulo/Tree');
+const {Tree} = require('./modulo/Tree');
 
 const app = express();
+const filePath = path.join(__dirname,"..","front","index.html");
 //Middwa
-app.use(express.static('front'));
+app.use(express.static(path.join(__dirname,"..","front")));
 app.use(fileUpload());
-app.get("/",(req,res)=>res.sendFile(__dirname+"/front/index.html"));
+app.get("/",(req,res)=>res.sendFile(filePath));
 app.post("/api/crear/directorio",(req,res)=>{
  res.send({msg:req.files});
 });
