@@ -51,9 +51,10 @@ export default class Tree {
   async obtenerData(path) {
     try {
       const resp = await ((await fetch('/api/data/title')).json());
-      if(title.innerText === '') title.innerText = resp.message; 
+      if(title.innerText === '') title.innerText = resp.message.replace('\n',''); 
       if(path!='/') {
       title.innerText += path;
+			title.innerText = title.innerText.replace('\n','');
       path = title.innerText.replace(/\//g,'+').replace(/\\/g,'+');
       path = "/"+path;
       }
@@ -76,6 +77,7 @@ export default class Tree {
     }
   }
   actualizarTree(respuesta){
+		console.log(respuesta);
       caja_tree.innerHTML = '';
       this.crearDirectorios(
         respuesta.filter(elem => elem.tipo === 'directorio')

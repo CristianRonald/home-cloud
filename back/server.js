@@ -97,6 +97,7 @@ function solicitarPath(){
     });
 }
 function subirCarpeta(relPath,nombre){
+	console.log(relPath + nombre);
     return new Promise(resolve=>{
         let comando = `hc -ad ${relPath} ${nombre}`;
         console.log(comando);

@@ -14,6 +14,7 @@
 #ifdef __linux__
 #define profile "~/"
 #include <sys/stat.h>
+#include <dirent.h>
 #elif _WIN32
 #include <windows.h>
 #define profile "%USERPROFILE%/"
@@ -119,7 +120,34 @@ void eliminarFile(char *s){
     free(comando);
 }
 #ifdef __linux__
-void listar(){}
+void listarI(){
+	DIR *dir;
+	struct dirent *entry;
+	dir = opendir(concatPunt(leerFile(dirFile),"/"));
+	if(dir==NULL){
+		perror("Opendir");
+		return;
+	}
+	while ((entry = readdir(dir)) != NULL) {
+				if(entry->d_type == DT_DIR) printf("%s,directorio\n", entry->d_name);
+				else printf("%s,archivo\n", entry->d_name);
+  }
+}
+void listar(const char* carpeta){
+	DIR *dir;
+	struct dirent *entry;
+	dir = opendir(concatPunt(carpeta,"/"));
+	printf("%s\n",carpeta);
+	if(dir==NULL){
+		perror("Opendir");
+		return;
+	}
+	while ((entry = readdir(dir)) != NULL) {
+				if(entry->d_type == DT_DIR) printf("%s,directorio\n", entry->d_name);
+				else printf("%s,archivo\n", entry->d_name);
+  }
+	
+}
 #elif _WIN32
 void listarI(){
     int cont = 0;
