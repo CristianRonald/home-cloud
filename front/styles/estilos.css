@@ -106,17 +106,28 @@ input:focus{
   text-align: center;
   z-index: 999;
 }
-#title{
+#indexP{
     width:20%;
     border-radius: 10px;
-    height:1em;
-    margin-top: 1px;
+    height:auto;
+    margin-top: 2px;
     margin-left: 1px;
     padding: 1px;
     float:left;
-    overflow-x:hidden;
     font-size: 11px;
-    background-color: #283531;
+}
+#indexP>button{
+    background-color:#cc9476;
+    border: 1px solid #ff7373 ;
+    border-radius: 4px;
+    margin-right: 1px;
+    padding: 2px;
+}
+button:hover{
+    background-color:#987866;
+}
+#indexP>button:hover{
+    background-color:#987866;
 }
 .row{
     width: 1em;

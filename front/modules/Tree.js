@@ -1,6 +1,6 @@
 import Lista from './Lista.js';
 export default class Tree {
-  constructor() {
+  constructor(l) {
     //findFile.value = '/';
     this.lista = new Lista();
     this.obtenerData("/");
@@ -22,6 +22,21 @@ export default class Tree {
       caja_tree.appendChild(dir);
     });
   }
+  separarxBotones(titulo){
+    const t = this.lista.getCabeza().titulo.split('/');
+    const partes = titulo.split('/');
+    indexP.innerHTML = '';
+    for(let i=0;i<partes.length;i++){
+      if(t[i] == partes[i] && i<t.length-1)continue;
+      const btn = document.createElement('button');
+      btn.innerText = partes[i];
+      btn.onclick = ()=>{
+        const obj = this.lista.encontrar(partes[i]);
+        this.actualizarTree(obj.valor.respuesta);
+      };
+      indexP.append(btn);
+    }
+  }
   crearArchivos(archivos) {
     archivos.forEach(elem => {
       let ar = document.createElement('div');
@@ -38,17 +53,10 @@ export default class Tree {
       caja_tree.appendChild(ar);
     });
   }
-  retornarPath(){
-    let t = title.innerText;
-    t = t.slice(0,t.lastIndexOf('/'));
-    if(t === dirFile.value){
-        this.lista.encontrar('/');
-        return;
-    }
-    t = t.slice(t.lastIndexOf('/'));
-    this.lista.encontrar(t); 
-  }
   async obtenerData(path) {
+    const obj = {
+      "path":path.split('/')[1]
+    };
     try {
       const resp = await ((await fetch('/api/data/title')).json());
       if(title.innerText === '') title.innerText = resp.message.replace('\n',''); 
@@ -59,11 +67,10 @@ export default class Tree {
       path = "/"+path;
       }
       const respuesta = await ((await fetch('/api/tree'+path)).json());
-      this.lista.agregarNodo({
-        "valor": respuesta,
-        "path": path,
-        "title": title.innerText
-      });
+      obj.titulo = title.innerText;
+      obj.respuesta = respuesta;
+      this.lista.agregarNodo(obj);
+      this.separarxBotones(obj.titulo);
       dirFile.value = resp.message;
       caja_tree.innerHTML = '';
       this.crearDirectorios(
@@ -77,7 +84,6 @@ export default class Tree {
     }
   }
   actualizarTree(respuesta){
-		console.log(respuesta);
       caja_tree.innerHTML = '';
       this.crearDirectorios(
         respuesta.filter(elem => elem.tipo === 'directorio')
