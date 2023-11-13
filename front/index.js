@@ -7,6 +7,6 @@ upDir.onclick = async() =>{
 t.actualizarTree(await m.nuevaCarpeta());
 } 
 upFile.onclick = async() => {
-t.actualizarTree(await m.subirArchivo());
+t.actualizarTree(await m.subirArchivo(t.getTitle()));
 }
 findFile.addEventListener('input', () => m.buscarElemento(findFile.value)); 

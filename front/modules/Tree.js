@@ -2,6 +2,7 @@ import Lista from './Lista.js';
 export default class Tree {
   constructor(l) {
     //findFile.value = '/';
+    this.titulo = '';
     this.lista = new Lista();
     this.obtenerData("/");
   }
@@ -10,6 +11,13 @@ export default class Tree {
       let dir = document.createElement('div');
       dir.ondblclick = () => {
         this.obtenerData("/" + dir.innerText);
+        const node = this.lista.encontrar(this.titulo+'/');
+        this.lista.fillEx(node);
+        if(node.siguiente && node.atras){
+          this.titulo = node.atras.valor.titulo;
+          this.lista.eliminarSiguiente(node);
+        } 
+        this.separarxBotones(this.titulo);
         //path.value='/';
       };
       dir.className = 'square';
@@ -22,16 +30,20 @@ export default class Tree {
       caja_tree.appendChild(dir);
     });
   }
-  separarxBotones(titulo){
-    const t = this.lista.getCabeza().titulo.split('/');
-    const partes = titulo.split('/');
+  separarxBotones(titulo) {
+    //const t = this.lista.getCabeza().titulo.split('/');
+    //const partes = titulo.split('/');
+    const partes = this.lista.getPaths();
     indexP.innerHTML = '';
-    for(let i=0;i<partes.length;i++){
-      if(t[i] == partes[i] && i<t.length-1)continue;
+    for (let i = 0; i < partes.length; i++) {
+      //if (t[i] == partes[i] && i < t.length - 1) continue;
       const btn = document.createElement('button');
       btn.innerText = partes[i];
-      btn.onclick = ()=>{
-        const obj = this.lista.encontrar(partes[i]);
+      btn.onclick = () => {
+        btn.style.cssText = `
+          background-color:#c56b3b;
+        `;
+        const obj = this.lista.encontrar(titulo);
         this.actualizarTree(obj.valor.respuesta);
       };
       indexP.append(btn);
@@ -43,7 +55,7 @@ export default class Tree {
       ar.className = 'square';
       const img = document.createElement('img');
       img.src = './images/' + elem.extension;
-      img.addEventListener("error",()=>{
+      img.addEventListener("error", () => {
         img.src = './images/regular.png';
       });
       const p = document.createElement('p');
@@ -55,41 +67,38 @@ export default class Tree {
   }
   async obtenerData(path) {
     const obj = {
-      "path":path.split('/')[1]
+      "path": path.split('/')[1]
     };
     try {
       const resp = await ((await fetch('/api/data/title')).json());
-      if(title.innerText === '') title.innerText = resp.message.replace('\n',''); 
-      if(path!='/') {
-      title.innerText += path;
-			title.innerText = title.innerText.replace('\n','');
-      path = title.innerText.replace(/\//g,'+').replace(/\\/g,'+');
-      path = "/"+path;
+      if (this.titulo === '') this.titulo = resp.message.replace('\n', '');
+      if (path != '/' ) {
+        this.titulo += path;
+        this.titulo = this.titulo.replace('\n', '');
+        path = this.titulo.replace(/\//g, '+').replace(/\\/g, '+');
+        path = "/" + path;
       }
-      const respuesta = await ((await fetch('/api/tree'+path)).json());
-      obj.titulo = title.innerText;
+      const respuesta = await ((await fetch('/api/tree' + path)).json());
+      obj.titulo = this.titulo;
       obj.respuesta = respuesta;
       this.lista.agregarNodo(obj);
-      this.separarxBotones(obj.titulo);
       dirFile.value = resp.message;
-      caja_tree.innerHTML = '';
-      this.crearDirectorios(
-        respuesta.filter(elem => elem.tipo === 'directorio')
-      );
-      this.crearArchivos(
-        respuesta.filter(elem => elem.tipo === 'archivo')
-      );
+      this.actualizarTree(respuesta);
     } catch (err) {
       console.log(err);
     }
   }
-  actualizarTree(respuesta){
-      caja_tree.innerHTML = '';
-      this.crearDirectorios(
-        respuesta.filter(elem => elem.tipo === 'directorio')
-      );
-      this.crearArchivos(
-        respuesta.filter(elem => elem.tipo === 'archivo')
-      );
+  actualizarTree(respuesta) {
+    this.separarxBotones(this.titulo);
+    caja_tree.innerHTML = '';
+    this.crearDirectorios(
+      respuesta.filter(elem => elem.tipo === 'directorio')
+    );
+    this.crearArchivos(
+      respuesta.filter(elem => elem.tipo === 'archivo')
+    );
+  }
+  getTitle(){
+    return this.titulo;
   }
 }

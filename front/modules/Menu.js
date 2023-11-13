@@ -22,12 +22,12 @@ export default class Menu {
       console.log(e);
     }
   }
-  async subirArchivo() {
+  async subirArchivo(titulo) {
     const formData = new FormData();
     const archivo = fileUpload.files[0];
     try {
       formData.append('archivo', archivo);
-      formData.append('titulo', title.innerText);
+      formData.append('titulo', titulo);
       const res = await fetch('/upload', {
         method: 'POST',
         body: formData,

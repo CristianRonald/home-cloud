@@ -12,25 +12,56 @@ export default class Lista {
   getCabeza(){
     return this.cabeza.valor;
   }
+  eliminarSiguiente(nodo){
+    let nodoActual = this.cabeza;
+    do{
+      if(nodoActual === nodo){
+          nodoActual.siguiente = null;
+      }
+      nodoActual = nodoActual.siguiente;
+    }while(nodoActual);
+  }
   agregarNodo(valor) {
+    const t = valor.titulo.split('/');
     if (!this.cabeza){ 
-      const t = valor.titulo.split('/');
       this.cabeza = new Nodo(valor);
       this.cabeza.valor.path = t[t.length-1];
+      this.fillEx(this.cabeza);
       return;
     }
     let nodoActual = this.cabeza;
     while (nodoActual.siguiente) nodoActual = nodoActual.siguiente;
     nodoActual.siguiente = new Nodo(valor);
+    nodoActual.siguiente.valor.path = t[t.length-1];
     nodoActual.siguiente.atras = nodoActual;
+    this.fillEx(nodoActual.siguiente);
+  }
+  getPaths(){
+    const arr=[];
+    let nodoActual = this.cabeza;
+    do{
+      arr.push(nodoActual.valor.path);
+      nodoActual = nodoActual.siguiente;
+    }while(nodoActual);
+    return arr;
   }
   encontrar(valor){
     let nodoActual = this.cabeza;
     do{
-      console.log(nodoActual.valor,valor);
-      if(nodoActual.valor.path === valor)return nodoActual;
+      if(nodoActual.valor.titulo === valor){
+        console.log(nodoActual);
+        return nodoActual;
+      }
       nodoActual = nodoActual.siguiente;
     }while(nodoActual);
+  }
+  encontrarT(){
+    let nodoActual = this.cabeza;
+    do{
+      if(nodoActual.valor.activo)  return nodoActual;
+      nodoActual = nodoActual.siguiente;
+    } while(nodoActual);
+    return this.cabeza;
   }
   remplazar(nodoInicial,nodoR){
     let nodoActual = this.cabeza;
@@ -42,11 +73,14 @@ export default class Lista {
       nodoActual = nodoActual.siguiente;
     }while(nodoActual);
   }
-  imprimir(){
+  fillEx(nodoP){
     let nodoActual = this.cabeza;
-    if(!nodoActual.siguiente) console.log(nodoActual);
-    while (nodoActual.siguiente){
+    do{
+      if(nodoActual.valor === nodoP.valor){
+        nodoActual.valor.activo = true;
+      }  
+      nodoActual.valor.activo = false;
       nodoActual = nodoActual.siguiente;
-    } 
+    }while (nodoActual); 
   }
 }
