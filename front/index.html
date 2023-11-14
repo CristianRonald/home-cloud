@@ -14,14 +14,16 @@
 <body>
  
     <div id="upArchivo" class="oculto">
+      <center><h3>SUBIR ARCHIVO</h3></center>
         <input id="fileUpload" type="file" name="archivo" />
-        <input id=upFile type='submit' value='Subir' />
-      <button id="cerrarAlerta">Cerrar</button>
+        <input class=botonAlerta id=upFile type='submit' value='Subir' />
+      <button class=botonAlerta id="cerrarAlerta">Cerrar</button>
     </div>
     <div id="crearDir" class="oculto">
+      <center><h3>SUBIR DIRECTORIO</h3></center>
         <input id="dirUp" type="text" name="directorio" />
-        <input id=upDir type='submit' value='Subir' />
-      <button id="cerrar">Cerrar</button>
+        <input class=botonAlerta id=upDir type='submit' value='Subir' />
+      <button class=botonAleta id="cerrar">Cerrar</button>
     </div>
     <div class="cuadro" id="tree">
       <div class="header-tree">
@@ -31,7 +33,7 @@
         <button id="newCarpeta"><img src="./images/dir.png"></button>
         <button id="newFile"><img src="./images/fil.png"></button>
        </div>
-       <input id=findFile type="text">
+       <input id=findFile type="search" placeholder="Buscar">
       </div>
       <div id=caja_tree> </div>
        <input id=dirFile type="text" style="display:none;" disabled>

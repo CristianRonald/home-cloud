@@ -12,11 +12,7 @@ export default class Tree {
       dir.ondblclick = () => {
         this.obtenerData("/" + dir.innerText);
         const node = this.lista.encontrar(this.titulo+'/');
-        this.lista.fillEx(node);
-        if(node.siguiente && node.atras){
-          this.titulo = node.atras.valor.titulo;
-          this.lista.eliminarSiguiente(node);
-        } 
+        //this.lista.fillEx(node);
         this.separarxBotones(this.titulo);
         //path.value='/';
       };
@@ -89,7 +85,7 @@ export default class Tree {
     }
   }
   actualizarTree(respuesta) {
-    this.separarxBotones(this.titulo);
+    this.separarxBotones();
     caja_tree.innerHTML = '';
     this.crearDirectorios(
       respuesta.filter(elem => elem.tipo === 'directorio')

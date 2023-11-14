@@ -1,6 +1,7 @@
 {
     "img":["png","jpg"],
     "mp4":["mp4", "mov", "mkv", "avi", "wmv"],
+    "mp3":["mp3", "m4a", "wav"],
     "cpp":["cpp"],
     "docx":["doc","docx"],
     "pdf":["pdf"]

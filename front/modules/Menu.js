@@ -8,10 +8,10 @@ export default class Menu {
     newCarpeta.onclick = () => crearDir.classList.remove("oculto");
     cerrar.onclick = () => crearDir.classList.add("oculto");
   }
-  async nuevaCarpeta() {
+  async nuevaCarpeta(titulo) {
     try {
       const fd = new FormData();
-      fd.append("titulo",title.innerText);
+      fd.append("titulo",titulo);
       const res = await fetch('/api/subir/'+dirUp.value,{
         method: "POST",
         body: fd

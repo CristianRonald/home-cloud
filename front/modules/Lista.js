@@ -26,7 +26,7 @@ export default class Lista {
     if (!this.cabeza){ 
       this.cabeza = new Nodo(valor);
       this.cabeza.valor.path = t[t.length-1];
-      this.fillEx(this.cabeza);
+      //this.fillEx(this.cabeza);
       return;
     }
     let nodoActual = this.cabeza;
@@ -34,7 +34,7 @@ export default class Lista {
     nodoActual.siguiente = new Nodo(valor);
     nodoActual.siguiente.valor.path = t[t.length-1];
     nodoActual.siguiente.atras = nodoActual;
-    this.fillEx(nodoActual.siguiente);
+    //this.fillEx(nodoActual.siguiente);
   }
   getPaths(){
     const arr=[];

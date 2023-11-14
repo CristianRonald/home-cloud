@@ -13,8 +13,7 @@ html, body{
     color:#f2a176;
 }
 h3{
-    margin-top: 20px;
-    margin-bottom: 10px;
+    margin:4px;
 }   
 
 .cuadro{
@@ -140,12 +139,11 @@ button:hover{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 10em;
-  padding: 20px;
+  padding: 1em;
   border: 1px solid #000;
   background-color: #566966;
   border-radius: 5px;
-  width:15em;
+  width:auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 #crearDir {
@@ -166,4 +164,10 @@ button:hover{
     margin:2px;
     padding: 0.5em;
     float:right;
+}
+#dirUp{
+    width:80%;
+}
+.botonAlerta{
+    width:30%;
 }
