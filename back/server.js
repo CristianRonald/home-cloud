@@ -23,6 +23,7 @@ app.post("/api/subir/:nombre",async (req,res)=>{
        await subirCarpeta(b.titulo,nombre);
        const resp = await getFiles(b.titulo);
        t.agregarNodos(resp);
+			 console.log(t.getData());
        res.send(JSON.stringify(t.getData())); 
     } catch (err) {
        res.send({"error":err}); 
@@ -67,12 +68,12 @@ app.post('/upload',async (req,res)=>{
     const  path = req.body.titulo+'/'+archivo.name;
     const t = new Tree();
     try {
+        archivo.mv(path,(err)=>{
+            if(err) res.status(500).send(err);
+        });
         const resp = await getFiles(req.body.titulo);
         t.agregarNodos(resp);
-    archivo.mv(path,(err)=>{
-        if(err) res.status(500).send(err);
         res.send(JSON.stringify(t.getData()));
-    });
     } catch (error) {
         res.status(404).send(error);
     }
@@ -99,8 +100,8 @@ function solicitarPath(){
 function subirCarpeta(relPath,nombre){
     return new Promise(resolve=>{
         let comando = `hc -ad ${relPath} ${nombre}`;
-        console.log(comando);
         exec(comando,(err,stdout,stderr)=>{
+        		if(err) reject(stderr);
             resolve(stdout);
         });
     });

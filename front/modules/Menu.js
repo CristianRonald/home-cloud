@@ -8,10 +8,10 @@ export default class Menu {
     newCarpeta.onclick = () => crearDir.classList.remove("oculto");
     cerrar.onclick = () => crearDir.classList.add("oculto");
   }
-  async nuevaCarpeta() {
+  async nuevaCarpeta(titulo) {
     try {
       const fd = new FormData();
-      fd.append("titulo",title.innerText);
+      fd.append("titulo",titulo);
       const res = await fetch('/api/subir/'+dirUp.value,{
         method: "POST",
         body: fd
@@ -22,12 +22,12 @@ export default class Menu {
       console.log(e);
     }
   }
-  async subirArchivo() {
+  async subirArchivo(titulo) {
     const formData = new FormData();
     const archivo = fileUpload.files[0];
     try {
       formData.append('archivo', archivo);
-      formData.append('titulo', title.innerText);
+      formData.append('titulo', titulo);
       const res = await fetch('/upload', {
         method: 'POST',
         body: formData,
